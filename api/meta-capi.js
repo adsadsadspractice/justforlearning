@@ -19,6 +19,7 @@ export default async function handler(req, res) {
           event_source_url: event_source_url || "https://YOUR-GITHUB-SITE-URL",
         },
       ],
+      test_event_code: "TEST44014",
     };
 
     const response = await fetch(
