@@ -48,6 +48,32 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <p id="successMessage" style="display:none;">
     Thank you! Your lead has been submitted.
 </p>
+    <script>
+document.getElementById("leadForm").addEventListener("submit", async function(event) {
+    event.preventDefault();
+
+    const eventId = crypto.randomUUID();
+
+    // Browser-side Meta Pixel event
+    fbq('track', 'Lead', {}, {eventID: eventId});
+
+    // Server-side Meta CAPI event
+    await fetch("https://justforlearning.vercel.app/api/meta-capi", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            event_name: "Lead",
+            event_id: eventId,
+            event_source_url: window.location.href
+        })
+    });
+
+    document.getElementById("leadForm").style.display = "none";
+    document.getElementById("successMessage").style.display = "block";
+});
+</script>
 
 </body>
 </html>
