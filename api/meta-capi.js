@@ -14,7 +14,7 @@ export default async function handler(req, res) {
   try {
     const { event_name, event_id, event_source_url } = req.body;
 
-    const pixelId = "1109200968148205";
+    const pixelId = "2018600132166451";
     const accessToken = process.env.META_ACCESS_TOKEN;
 
     const eventData = {
